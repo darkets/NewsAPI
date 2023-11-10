@@ -44,7 +44,8 @@ class ArticleController
             case 'time':
                 $from = $_GET['from'] ?? '';
                 $to = $_GET['to'] ?? '';
-                $newsByTime = $this->api->searchNewsByTime($from, $to);
+                $topic = $_GET['q'];
+                $newsByTime = $this->api->searchNewsByTime($topic, $from, $to);
                 $this->renderTemplate(['news' => $newsByTime]);
                 break;
 

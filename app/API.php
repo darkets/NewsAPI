@@ -59,7 +59,7 @@ class API
         return false;
     }
 
-    public function searchNewsByTime($q, $from, $to)
+    public function searchNewsByTime(string $q, string $from, string $to): ?array
     {
         $url = self::API_URL . '/everything';
         $queryParams = [
