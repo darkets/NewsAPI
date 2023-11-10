@@ -17,7 +17,7 @@ class API
         $this->client = new Client(['verify' => 'C:/Users/ramon/OneDrive/Dators/php7.4/cacert.pem']);
     }
 
-    public function searchNewsByTopic($q)
+    public function searchNewsByTopic($q): ?array
     {
         //$q = 'bitcoin';
         $url = self::API_URL . '/everything';
@@ -38,10 +38,10 @@ class API
             }
             return $data;
         }
-        return false;
+        return null;
     }
 
-    public function searchNewsByCountry($country)
+    public function searchNewsByCountry($country): ?array
     {
         $url = self::API_URL . '/top-headlines';
         $queryParams = [
@@ -56,7 +56,7 @@ class API
 
             return $data;
         }
-        return false;
+        return null;
     }
 
     public function searchNewsByTime(string $q, string $from, string $to): ?array
@@ -73,10 +73,10 @@ class API
         if ($response->getStatusCode() === 200) {
             return json_decode($response->getBody()->getContents(), true);
         }
-        return false;
+        return null;
     }
 
-    public function fetchDefaultNews()
+    public function fetchDefaultNews(): ?array
     {
         $q = 'bitcoin';
         $url = self::API_URL . '/everything';
@@ -97,6 +97,6 @@ class API
             }
             return $data;
         }
-        return false;
+        return null;
     }
 }

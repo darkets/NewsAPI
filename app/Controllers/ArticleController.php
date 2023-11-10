@@ -60,7 +60,7 @@ class ArticleController
         echo $this->twig->render('search.twig', $data);
     }
 
-    public function newsByTopic($q)
+    public function newsByTopic(): void
     {
         $q = $_GET['q'] ?? '';
         $newsByTopic = $this->api->searchNewsByTopic($q);
