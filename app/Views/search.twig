@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Search News</title>
+</head>
+<body>
+<a href="/" class="home-button">Home</a>
+<h1>Search News</h1>
+
+<form action="/search" method="GET">
+    <label for="topic">Enter Topic:</label>
+    <input type="text" id="topic" name="q" required>
+    <button type="submit">Search</button>
+</form>
+
+<h2>Search by Country</h2>
+<div class="flag-buttons">
+    <form action="/searchCountry" method="GET">
+        <label for="country">Select Country:</label>
+        <select id="country" name="country" onchange="this.form.submit()">
+            <option value="ae">🇦🇪</option>
+            <option value="ar">🇦🇷</option>
+            <option value="at">🇦🇹</option>
+            <option value="au">🇦🇺</option>
+            <option value="be">🇧🇪</option>
+            <option value="bg">🇧🇬</option>
+            <option value="br">🇧🇷</option>
+            <option value="ca">🇨🇦</option>
+            <option value="ch">🇨🇭</option>
+            <option value="cn">🇨🇳</option>
+            <option value="co">🇨🇴</option>
+            <option value="cu">🇨🇺</option>
+            <option value="cz">🇨🇿</option>
+            <option value="de">🇩🇪</option>
+            <option value="eg">🇪🇬</option>
+            <option value="fr">🇫🇷</option>
+            <option value="gb">🇬🇧</option>
+            <option value="gr">🇬🇷</option>
+            <option value="hk">🇭🇰</option>
+            <option value="hu">🇭🇺</option>
+            <option value="id">🇮🇩</option>
+            <option value="in">🇮🇳</option>
+            <option value="it">🇮🇹</option>
+            <option value="jp">🇯🇵</option>
+            <option value="kr">🇰🇷</option>
+            <option value="lt">🇱🇹</option>
+            <option value="lv">🇱🇻</option>
+            <option value="ma">🇲🇦</option>
+            <option value="mx">🇲🇽</option>
+            <option value="my">🇲🇾</option>
+            <option value="ng">🇳🇬</option>
+            <option value="nl">🇳🇱</option>
+            <option value="no">🇳🇴</option>
+            <option value="nz">🇳🇿</option>
+            <option value="ph">🇵🇭</option>
+            <option value="pl">🇵🇱</option>
+            <option value="pt">🇵🇹</option>
+            <option value="ro">🇷🇴</option>
+            <option value="rs">🇷🇸</option>
+            <option value="ru">🇷🇺</option>
+            <option value="sa">🇸🇦</option>
+            <option value="se">🇸🇪</option>
+            <option value="sg">🇸🇬</option>
+            <option value="si">🇸🇮</option>
+            <option value="sk">🇸🇰</option>
+            <option value="th">🇹🇭</option>
+            <option value="tr">🇹🇷</option>
+            <option value="tw">🇹🇼</option>
+            <option value="ua">🇺🇦</option>
+            <option value="us">🇺🇸</option>
+            <option value="ve">🇻🇪</option>
+            <option value="za">🇿🇦</option>
+        </select>
+        <noscript><input type="submit" value="Submit"></noscript>
+    </form>
+</div>
+
+<h3>Search by Time</h3>
+<form action="/searchTime" method="GET">
+    <label for="start_date">Start Date:</label>
+    <input type="date" id="start_date" name="from" required>
+    <label for="end_date">End Date:</label>
+    <input type="date" id="end_date" name="to" required>
+    <label for="topic">Enter Topic:</label>
+    <input type="text" id="topic" name="q" required>
+    <input type="hidden" name="searchType" value="time">
+    <button type="submit">Search</button>
+</form>
+{% if error is defined %}
+    <p>{{ error }}</p>
+{% else %}
+    {% if news is defined and news.status == 'ok' %}
+        <ul>
+            {% for article in news.articles %}
+                <li>
+                    <h2>{{ article.title }}</h2>
+                    {% if article.urlToImage is not empty %}
+                        <img src="{{ article.urlToImage }}" alt="{{ article.title }} Image">
+                    {% else %}
+                        <img src="https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg" alt="Default Image">
+                    {% endif %}
+                    <p>{{ article.description }}</p>
+                    <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer">Read more</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+{% endif %}
+</body>
+</html>
+
+
