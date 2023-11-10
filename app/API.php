@@ -34,7 +34,7 @@ class API
         //var_dump($body);
 
         if ($response->getStatusCode() === 200) {
-            $data = json_decode($response->getBody(), true);
+            $data = json_decode($response->getBody()->getContents(), true);
 
             foreach ($data['articles'] as &$article) {
                 if (empty($article['urlToImage'])) {
@@ -56,7 +56,7 @@ class API
         $response = $this->client->get($url, ['query' => $queryParams]);
 
         if ($response->getStatusCode() === 200) {
-            $data = json_decode($response->getBody(), true);
+            $data = json_decode($response->getBody()->getContents(), true);
 
             return $data;
         }
@@ -74,7 +74,7 @@ class API
         $response = $this->client->get($url, ['query' => $queryParams]);
 
         if ($response->getStatusCode() === 200) {
-            $data = json_decode($response->getBody(), true);
+            $data = json_decode($response->getBody()->getContents(), true);
 
             return $data;
         }
@@ -93,7 +93,7 @@ class API
 
 
         if ($response->getStatusCode() === 200) {
-            $data = json_decode($response->getBody(), true);
+            $data = json_decode($response->getBody()->getContents(), true);
 
             foreach ($data['articles'] as &$article) {
                 if (empty($article['urlToImage'])) {
