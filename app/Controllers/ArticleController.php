@@ -12,9 +12,9 @@ class ArticleController
     private Api $api;
     private Environment $twig;
 
-    public function __construct(API $api, Environment $twig)
+    public function __construct(Environment $twig)
     {
-        $this->api = $api;
+        $this->api = new API();
         $this->twig = $twig;
     }
     public function index($vars):void

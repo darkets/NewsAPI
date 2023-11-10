@@ -10,13 +10,11 @@ class API
 {
     private Client $client;
     private const API_URL = 'https://newsapi.org/v2';
-    private string $apiKey;
     private const DEFAULT_IMAGE_URL = 'https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg';
 
-    public function __construct(Client $client, string $apiKey)
+    public function __construct()
     {
         $this->client = new Client(['verify' => 'C:/Users/ramon/OneDrive/Dators/php7.4/cacert.pem']);
-        $this->apiKey=$apiKey;
     }
     public function searchNewsByTopic($q)
     {
@@ -24,7 +22,7 @@ class API
         $url = self::API_URL . '/everything';
         $queryParams = [
             'q' => $q,
-            'apiKey' => $this->apiKey,
+            'apiKey' => $_ENV['API_KEY']
         ];
 
         $response = $this->client->get($url, ['query' => $queryParams]);
@@ -50,7 +48,7 @@ class API
         $url = self::API_URL . '/top-headlines';
         $queryParams = [
             'country' => $country,
-            'apiKey' => $this->apiKey,
+            'apiKey' => $_ENV['API_KEY'],
         ];
 
         $response = $this->client->get($url, ['query' => $queryParams]);
@@ -86,7 +84,7 @@ class API
         $url = self::API_URL . '/everything';
         $queryParams = [
             'q' => $q,
-            'apiKey' => $this->apiKey,
+            'apiKey' => $_ENV['API_KEY'],
         ];
 
         $response = $this->client->get($url, ['query' => $queryParams]);

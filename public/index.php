@@ -28,10 +28,7 @@ switch ($routeInfo[0]) {
         [$className, $method] = $routeInfo[1];
         $vars = $routeInfo[2];
 
-        $client = new \GuzzleHttp\Client();
-        $apiKey = $_ENV['API_KEY'];
-        $api = new \App\API($client, $apiKey);
-        $articleController = (new $className($api, $twig))->{$method}($vars);
+        $articleController = (new $className($twig))->{$method}($vars);
         if ($articleController) {
             $templateName = 'search.twig';
             echo $twig->render('search.twig');
