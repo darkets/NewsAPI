@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Router;
+
 use FastRoute;
+
 class Router
 {
     public static function dispatch(): array

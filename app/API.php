@@ -16,6 +16,7 @@ class API
     {
         $this->client = new Client(['verify' => 'C:/Users/ramon/OneDrive/Dators/php7.4/cacert.pem']);
     }
+
     public function searchNewsByTopic($q)
     {
         //$q = 'bitcoin';
@@ -26,10 +27,6 @@ class API
         ];
 
         $response = $this->client->get($url, ['query' => $queryParams]);
-
-        $body = $response->getBody()->getContents();
-
-        //var_dump($body);
 
         if ($response->getStatusCode() === 200) {
             $data = json_decode($response->getBody()->getContents(), true);
@@ -43,7 +40,8 @@ class API
         }
         return false;
     }
-    public function searchNewsByCountry( $country)
+
+    public function searchNewsByCountry($country)
     {
         $url = self::API_URL . '/top-headlines';
         $queryParams = [
@@ -60,24 +58,24 @@ class API
         }
         return false;
     }
+
     public function searchNewsByTime($q, $from, $to)
     {
-        $url = self::API_URL.'/everything';
+        $url = self::API_URL . '/everything';
         $queryParams = [
-            'q'=> $q,
+            'q' => $q,
             'from' => $from,
-            'to'=> $to,
-            'apiKey' => $this->apiKey,
+            'to' => $to,
+            'apiKey' => $_ENV['API_KEY'],
         ];
         $response = $this->client->get($url, ['query' => $queryParams]);
 
         if ($response->getStatusCode() === 200) {
-            $data = json_decode($response->getBody()->getContents(), true);
-
-            return $data;
+            return json_decode($response->getBody()->getContents(), true);
         }
         return false;
     }
+
     public function fetchDefaultNews()
     {
         $q = 'bitcoin';
@@ -88,7 +86,6 @@ class API
         ];
 
         $response = $this->client->get($url, ['query' => $queryParams]);
-
 
         if ($response->getStatusCode() === 200) {
             $data = json_decode($response->getBody()->getContents(), true);

@@ -17,7 +17,8 @@ class ArticleController
         $this->api = new API();
         $this->twig = $twig;
     }
-    public function index($vars):void
+
+    public function index(): void
     {
         $searchType = $_GET['searchType'] ?? '';
 
@@ -52,16 +53,20 @@ class ArticleController
                 exit();
         }
     }
-    private function renderTemplate(array $data):void
+
+    private function renderTemplate(array $data): void
     {
         echo $this->twig->render('search.twig', $data);
     }
-    public function newsByTopic($q){
+
+    public function newsByTopic($q)
+    {
         $q = $_GET['q'] ?? '';
         $newsByTopic = $this->api->searchNewsByTopic($q);
         $this->renderTemplate(['news' => $newsByTopic]);
     }
-    public function searchNewsByCountry($vars):void
+
+    public function searchNewsByCountry(): void
     {
         $country = $_GET['country'] ?? '';
 
@@ -73,7 +78,8 @@ class ArticleController
         $newsByCountry = $this->api->searchNewsByCountry($country);
         $this->renderTemplate(['news' => $newsByCountry]);
     }
-    public function searchNewsByTime($vars):void
+
+    public function searchNewsByTime(): void
     {
         $q = $_GET['q'] ?? '';
         $from = $_GET['from'] ?? '';
@@ -89,16 +95,18 @@ class ArticleController
             return;
         }
 
-        $newsByTime = $this->api->searchNewsByTime($q,$from, $to);
+        $newsByTime = $this->api->searchNewsByTime($q, $from, $to);
         $this->renderTemplate(['news' => $newsByTime]);
     }
-    public function defaultNews():void
+
+    public function defaultNews(): void
     {
         $defaultNews = $this->api->fetchDefaultNews();
 
         $this->renderTemplate(['news' => $defaultNews]);
     }
-    function isValidDate($dateString, $format = 'm-d-Y'):bool
+
+    function isValidDate($dateString): bool
     {
         $timestamp = strtotime($dateString);
 

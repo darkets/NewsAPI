@@ -6,12 +6,12 @@ use App\Router\Router;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $loader = new FilesystemLoader(__DIR__ . '/../app/Views');
 $twig = new Environment($loader);
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 
