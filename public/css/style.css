@@ -25,6 +25,9 @@ form {
 }
 
 ul {
+    display: flex;
+    justify-content: center;
+
     list-style-type: none;
     padding: 0;
     display: flex;
@@ -53,4 +56,3 @@ a {
     display: block;
     margin-bottom: 20px;
 }
-
